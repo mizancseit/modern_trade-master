@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: main
+    environment: master
     services:
       mysql:
         image: mysql:8.0
