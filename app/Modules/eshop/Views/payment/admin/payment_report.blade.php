@@ -1,0 +1,227 @@
+@extends('eshop::masterPage')
+@section('content')
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <div class="row">
+        <div class="col-lg-12">
+          <h2>
+           Customer Payments List 
+           <small> 
+             <a href="{{ URL('/dashboard') }}"> Dashboard </a> / Point
+           </small>
+         </h2>
+       </div>
+
+     </div>
+
+   </div>
+
+   @if(Session::has('success'))
+   <div class="alert alert-success">
+    {{ Session::get('success') }}                        
+  </div>
+  @endif
+
+
+  <div class="row clearfix">
+
+
+    <!-- #END# Exportable Table -->
+
+    <div class="card">
+      <div class="header">
+        <div class="row">
+          <div class="col-lg-9">
+            <h2>
+              Customer Payments
+            </h2>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="body">
+
+       <div class="row">
+        <div class="col-sm-2">
+          <div class="input-group">
+            <div class="form-line">
+              <input type="text" name="fromdate" id="fromdate" class="form-control" value="{{ date('d-m-Y') }}" placeholder="Select To Date"  readonly="">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <div class="form-line">
+              <input type="text" name="toDate" id="todate" class="form-control" value="{{ date('d-m-Y') }}" placeholder="Select To Date"  readonly="">
+            </div>
+          </div>
+        </div>
+            <div class="col-sm-3" id="officerDiv">
+                <select id="fos" name="fos" class="form-control show-tick" data-live-search="true" onchange="allCustomer(this.value)">
+                   <option value="">-- Select Officer--</option> 
+                      @foreach($officerlist as $row)
+                          <option value="{{ $row->id }}">{{ $row->email.' : '.$row->display_name }}</option>
+                      @endforeach 
+                                                                  
+                </select>
+            </div> 
+            <div class="col-sm-3" id="customerDiv">
+                <select id="customer_id" class="form-control show-tick" data-live-search="true" required="">
+                    <option value="">-- Select Customer--</option> 
+                                                                       
+                </select>
+            </div>
+            <div class="col-sm-2">
+              <select id="payment_type" class="form-control show-tick" data-live-search="true">
+                  <option value="">-- Select Type --</option> 
+                  <option value="payment">Payment</option>
+                  <option value="adjustment">Adjustment</option>
+                                                                    
+              </select>
+          </div>
+
+          </div>
+          <div class="row">  
+            <div class="col-sm-2">
+              <button type="button" class="btn bg-pink btn-block btn-lg waves-effect" onclick="adminPaymentReport()">Search</button>
+            </div>
+            <div class="col-sm-2">                        
+               <img src="{{URL::asset('resources/sales/images/loading.gif')}}" id="loadingTimeMasud" style="display: none;">
+            </div>
+          </div>
+
+
+      <div id="showHiddenDiv">
+
+        <div class="header">
+          <h5>
+            About results 
+          </h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover dataTable js-basic-example dataTable">
+            <thead>
+              <tr>
+                <th>Sl</th>
+                <th>Payment Date</th>
+                <th>Coustomer Name</th>
+                <th>Payment No</th>
+                <th>Bank Name</th>
+                <th>Branch Name</th>
+                <th>Account No</th>
+                <th>Reference No</th>
+                <th>Payment Amount</th>
+                <th>Adjust Amount</th>
+                <th>Payment Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+
+             @if(sizeof($outletPayment) > 0)   
+             @php
+             $serial =1;
+             @endphp
+
+             @foreach($outletPayment as $RowoutletPayment) 
+
+             <td>{{$serial}}</td> 
+             <td>{{$RowoutletPayment->trans_date}}</td>
+             <td>{{$RowoutletPayment->name }}</td>
+             <td>{{$RowoutletPayment->payment_no }}</td>
+             <td>{{$RowoutletPayment->bank_name }}</td>
+             <td>{{$RowoutletPayment->branch_name }}</td>
+             <td>{{$RowoutletPayment->acc_no }}</td>
+             <td>{{$RowoutletPayment->ref_no }}</td>
+             <td>{{$RowoutletPayment->payment_amount}}</td>
+             <td>{{$RowoutletPayment->adjust_amount}}</td>
+             <td>{{$RowoutletPayment->payment_type}}</td>
+              <td> <a href="javascript:void(0)" onclick="printDirect('{{ URL('/eshop-money-recept-print/'.$RowoutletPayment->transaction_id) }}')" title="Invoice Print" >
+                  <img src="{{URL::asset('resources/sales/images/icon/print.png')}}" alt="Invoice Print">
+              </a></td>
+             {{-- <td>
+              <a href="{{URL('app_admin_payment')}}/{{$RowoutletPayment->transaction_id}}/APPROVE" class="btn btn-success">Approve</a>
+             
+            </td>
+            <td>
+              <a target="_blank" href="{{URL('app_admin_payment_edit')}}/{{$RowoutletPayment->transaction_id}}"><i class="material-icons">edit</i></a>
+            </td> --}}
+
+          </tr>
+
+          @php
+          $serial++;
+          @endphp
+          @endforeach
+          @else
+          <tr>
+            <td colspan="12">No record found.</td>
+          </tr>
+          @endif     
+
+        </tbody>
+        <tfoot>
+         <tr>
+          <th>Sl</th>
+          <th>Payment Date</th>
+          <th>Coustomer Name</th>
+          <th>Payment No</th>
+          <th>Bank Name</th>
+          <th>Branch Name</th>
+          <th>Account No</th>
+          <th>Reference No</th>
+          <th>Payment Amount</th>
+          <th>Adjust Amount</th>
+          <th>Payment Type</th>
+          <th>Action</th>
+          
+
+          {{--  <th class="pull-right">Action</th> --}}
+        </tr>
+      </tfoot>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+</div>
+<!-- #END# Exportable Table -->
+</div>
+</section>
+<script type="text/javascript">
+  function outletPaymentList()
+  {  
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+            //alert('in');
+            var fromdate    = document.getElementById('fromdate').value;
+            var todate      = document.getElementById('todate').value;
+           // alert(fromdate);
+
+           $.ajax({
+            method: "GET",
+            url: '{{url('admin_payments_con_list')}}',
+            data: {todate: todate,fromdate: fromdate}
+          })
+           .done(function (response)
+           {
+                    //alert(response);
+                    $('#showHiddenDiv').html(response);                
+                  });
+
+         }
+       </script>
+       @endsection

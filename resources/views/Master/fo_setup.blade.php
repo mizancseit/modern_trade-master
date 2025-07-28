@@ -1,0 +1,330 @@
+@extends('sales.masterPage')
+@section('content')
+ <section class="content">
+        <div class="container-fluid">
+
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>
+                            FO INFORMATION
+                            <small> 
+                             <a href="{{ URL('/dashboard') }}"> Dashboard </a> / Distributor
+                            </small>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+             @if(Session::has('success'))
+                <div class="alert alert-success">
+                {{ Session::get('success') }}                        
+                </div>
+            @endif
+           
+        
+            <div class="row clearfix">
+               
+            
+            <!-- #END# Exportable Table -->
+      
+           <div class="card">
+    <div class="header">
+        <h2>
+            FO Set Up
+        </h2>
+    </div>
+
+    
+         
+         
+       
+            <br>
+            <div class="body">
+<div id="distri">
+            
+             <form action="{{ URL('/fo_process') }}" method="post" >
+                {{ csrf_field() }}    <!-- token --> 
+                 <div class="row clearfix">
+							
+							<div class="col-md-4">
+                                    <p>
+                                        <b>Name of the FO:*</b>
+                                    </p>
+                                    <div class="input-group input-group-lg">
+										<div class="form-line">
+                                            <input type="text" class="form-control" placeholder="FO Name" name="display_name" id="display_name" required="" />
+                                                 
+                                        </div>
+									</div>
+                            </div>
+                            
+							<div class="col-md-4">
+                                    <p>
+                                        <b>SAP Code:*</b>
+                                    </p>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="SAP Code" name="sapcode" id="sapcode" required="" />
+                                                 
+                                        </div>
+                                        
+                                    </div>
+                            </div>
+                          
+                            <div class="col-md-4">
+                                    <p>
+                                        <b>Point:*</b>
+                                    </p>
+                                    
+									<div class="input-group">
+                                        
+										<div class="form-line"> 
+                                           
+										   <div id="po"></div>
+                                       
+                                                   
+											<select class="show-tick" data-live-search="true" name="point_id" required="" id="">
+                                      
+											<option value="" id=""> Please Select Point</option>
+
+												@foreach($point as $point_setup)
+												<option value="{{$point_setup->point_id}}">{{$point_setup->point_name}}</option>
+												@endforeach
+                                        
+											</select>
+											
+                                        </div>
+									</div>
+                            </div>
+                              
+                            </div>
+                
+				<div class="row clearfix">
+                    <div class="col-md-4">
+                         
+                                    <p>
+                                        <b>Division:*</b>
+                                    </p>
+									
+                                    <div class="input-group">
+                                        <div class="form-line"> 
+                                        	 <div id="divName"></div>
+                                       
+                                       <select class="show-tick" data-live-search="true" name="div_id" required="" ">
+                                        <option value="" id="div_id">Please Select Division</option>
+                                        @foreach($division as $division_setup)
+                                        <option value="{{$division_setup->div_id}}">{{$division_setup->div_name}}</option>
+                                        @endforeach
+                                        </select>
+                                        </div>
+									</div>
+                    </div>
+                             <div class="col-md-4">
+                               
+                                    <p>
+                                        <b>Business Type:*</b>
+                                    </p>
+                                    <div class="input-group">
+                                        <div class="form-line"> 
+                                        	<div id="btype">
+
+                                       </div>
+                                       <select class="show-tick" data-live-search="true" name="business_type_id" required="" ">
+                                        <option value="" id="btype">Please Select Type</option>
+                                        @foreach($business_type as $type_setup)
+                                        <option value="{{$type_setup->business_type_id}}">{{$type_setup->business_type}}</option>
+                                        @endforeach
+                                        </select>
+                                        </div>
+                                </div>
+                            </div>
+                            
+							<div class="col-md-4">
+                                    <p>
+                                        <b>Mobile No:*</b>
+                                    </p>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="Mobile Number" name="mobile_no" id="mobile_no" required="" />
+                                     </div>
+                                        
+                                    </div>
+                                </div>
+                </div>
+                             
+							 
+							 <div class="row clearfix">
+                                 <div class="col-md-4">
+                                    <p>
+                                        <b>T&T:*</b>
+                                    </p>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="T&T Number" name="tnt" id="tnt" required="" />
+                                     </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <p>
+                                        <b>Email:*</b>
+                                    </p>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="email" class="form-control" placeholder="Email" name="email" id="email" required="" />
+                                     </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+                             <div class="row clearfix">
+                                  
+                                 <div class="col-md-4">
+                                    <p>
+                                        <b>Date of birth:</b>
+                                    </p>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="date" class="form-control" placeholder="Please choose a date..." name="dob" id='datetimepicker1'/>
+                                     </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <p>
+                                        <b>User Name:*</b>
+                                    </p>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="User Name" name="username" id="username" required="" />
+                                     </div>
+                                        
+                                    </div>
+                                </div>
+             
+                               <div class="col-md-4">
+                                    <p>
+                                        <b>Password:*</b>
+                                    </p>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="password" class="form-control" placeholder="Password" name="password" id="password" required="" />
+                                     </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>
+                                        <b>Address:*</b>
+                                    </p>
+                                   <div class="input-group">
+                                        <div class="form-line">
+                                            <textarea class="form-control" name="address" id="address"></textarea>
+                                                 
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                           
+						   <input type="hidden" class="form-control" placeholder="" name="id" id="id"  />
+                         
+                            <div class="text-center">
+                            
+							<button type="submit"  id="" class="btn btn-default btn-lg waves-effect m-r-20 center-block"><b>Save Changes</b></button>
+                          
+						  </div>
+                        
+  
+            </form>
+</div>
+        </div>
+
+            <br>
+            <div class="body">
+
+    
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover dataTable js-basic-example dataTable">
+                <thead>
+                    <tr>
+                      
+                        <th>FO Name</th>
+                        <th>Point</th>
+                        <th>Division</th>
+                        <th>Mobile</th>
+                        <th>Business Type</th>
+                        
+                        <th class="">Action</th>
+                    </tr>
+                </thead>
+				
+                 <tbody>
+                    @if(sizeof($fo_details) > 0)   
+                    @php
+                    $serial =1;
+                    @endphp
+
+
+                    @foreach($fo_details as $fo_details_view) 
+
+                    
+                    <tr>
+                        <th>{{$fo_details_view->display_name }}</th>
+						
+						<th>{{$fo_details_view->point_name }}</th>
+						
+						<th>{{$fo_details_view->div_name }}</th>
+				   
+						<th>{{$fo_details_view->cell_phone }}</th>
+                        
+						<th>{{$fo_details_view->business_type }}</th>
+                       
+                      
+                       <th><input type="button" name="route_edit" id="edit" value="Edit" class="btn bg-red btn-block btn-sm waves-effect" data-toggle="modal" onclick="editFO('{{ $fo_details_view->id }}')" style="width: 70px;""><br>
+                        <input type="button" name="route_delete" id="delete" value="Delete" class="btn bg-red btn-block btn-sm waves-effect" data-toggle="modal" onclick="deleteFO('{{ $fo_details_view->id }}')" style="width: 70px; margin-top: 0px;"></th>
+                    
+					</tr>
+                   
+                 @php
+                    $serial++;
+                    @endphp
+                    @endforeach
+                @else
+                    <tr>
+                        <th colspan="6">No record found.</th>
+                    </tr>
+                @endif     
+                  
+               
+                </tbody>
+                <tfoot>
+                    <tr>
+                        
+                        <th>FO Name</th>
+                        <th>Point</th>
+                        <th>Division</th>
+                        <th>Mobile</th>
+                        <th>Business Type</th>
+                        
+                      
+                        <th class="">Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+             
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+            <!-- #END# Exportable Table -->
+        </div>
+    </section>
+@endsection

@@ -1,0 +1,767 @@
+{{-- Master Menu  --}}
+
+<div class="menu">
+    <ul class="list">
+        {{-- <li class="header">MAIN NAVIGATION</li> --}}
+        @php
+            $selectedSubMenu = '';
+        @endphp
+
+        <li @if ($selectedMenu == 'Home') class="active" @endif>
+            <a href="{{ URL('/') }}">
+                <i class="material-icons">dashboard</i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        {{-- Field Executive part --}}
+
+        @if (Auth::user()->module_type == 2 && Auth::user()->user_type_id == 7)
+            <li> <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Requisition Manage</span>
+                </a>
+                <ul class="ml-menu">
+                    <li @if ($selectedMenu == 'Visit') class="active" @endif>
+                        <a href="{{ URL('/mts-visit') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Sales Order</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Replace') class="active" @endif>
+                        <a href="{{ URL('/mts-replace') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Advance Replace</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Return') class="active" @endif>
+                        <a href="{{ URL('/mts-return') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Return Order</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li @if ($selectedMenu == 'Order Manage') class="active" @endif>
+                <a href="{{ URL('/mts-order-manage') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Sales Order Manage</span>
+                </a>
+            </li>
+            <li> <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Not Approved Manage</span>
+                </a>
+                <ul class="ml-menu">
+                    <li @if ($selectedMenu == 'Order Not approve') class="active" @endif>
+                        <a href="{{ URL('/mts-order-not-approve') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Sales Order</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Replace Not approve') class="active" @endif>
+                        <a href="{{ URL('/mts-replace-not-approve') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Advance Replace</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Return Not approve') class="active" @endif>
+                        <a href="{{ URL('/mts-return-not-approve') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Return</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li @if ($selectedMenu == 'Outlet pay') class="active" @endif>
+                <a href="{{ URL('/outlet_payments') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Payment Collection</span>
+                </a>
+            </li>
+
+            <li @if ($selectedMenu == 'Credit Adjustment') class="active" @endif>
+                <a href="{{ URL('/credit-adjustment') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Payment Adjustment</span>
+                </a>
+            </li>
+
+
+            <li @if ($selectedMenu == 'Sales Report') class="active" @endif>
+                <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Report</span>
+                </a>
+
+                <ul class="ml-menu">
+                    <!-- Master Menu-->
+                    <li @if ($selectedSubMenu == 'Order Report') class="active" @endif>
+                        <a href="{{ URL('/mts-order-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Order Report</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedSubMenu == 'Delivery Report') class="active" @endif>
+                        <a href="{{ URL('/mts-delivery-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Delivery Report</span>
+                        </a>
+                    </li>
+
+                    <li @if ($selectedMenu == 'Replace Approve') class="active" @endif>
+                        <a href="{{ URL('/mts-replace-approved') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Advance Replace</span>
+                        </a>
+                    </li>
+
+                    <li @if ($selectedMenu == 'Advance Replace Report') class="active" @endif>
+                        <a href="{{ URL('/mts-replace-delivery-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Advance Replace Confirm</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Return Approve') class="active" @endif>
+                        <a href="{{ URL('/mts-return-approved') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Return Order</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Advance Return Report') class="active" @endif>
+                        <a href="{{ URL('/mts-return-delivery-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Return Confirm</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Inventory Report') class="active" @endif>
+                        <a href="{{ URL('/mts-inventory-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Inventory Report</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+        @endif
+
+        <!-- Billing part -->
+
+        @if (Auth::user()->module_type == 2 && Auth::user()->user_type_id == 2)
+            <li>
+
+                <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Requisition Management</span>
+                </a>
+
+                <ul class="ml-menu">
+
+                    <li @if ($selectedMenu == 'Requisition Pending') class="active" @endif>
+                        <a href="{{ URL('/modern-delivery') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Acknowledge Sales Order</span>
+                        </a>
+                    </li>
+
+                    <li @if ($selectedMenu == 'Requisition Analysis') class="active" @endif>
+                        <a href="{{ URL('/modern-reqAllAnalysisList') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Analysis Sales Order</span>
+                        </a>
+                    </li>
+
+                    <li @if ($selectedMenu == 'Requisition Approved') class="active" @endif>
+                        <a href="{{ URL('/modern-reqAllApprovedList') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Open Sales Order</span>
+                        </a>
+                    </li>
+
+
+                    <li @if ($selectedMenu == 'Requisition All Delivered') class="active" @endif>
+                        <a href="{{ URL('/modern-reqAllBilledList') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Billed List</span>
+                        </a>
+                    </li>
+
+
+
+                    <!-- <li @if ($selectedMenu == 'Requisition Active') class="active" @endif>
+                        <a href="{{ URL('/modern-reqAllActiveList') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Order IN-Active</span>
+                        </a>
+                    </li>
+                    
+                    <li @if ($selectedMenu == 'Requisition IN Active') class="active" @endif>
+                        <a href="{{ URL('/modern-reqAllInActiveList') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Order Active</span>
+                        </a>
+                    </li>
+                    
+                    <li @if ($selectedMenu == 'Customar Active') class="active" @endif>
+                        <a href="{{ URL('/modern-custAllActiveList') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Customar In-Active</span>
+                        </a>
+                    </li>
+                    
+                    <li @if ($selectedMenu == 'Customar IN Active') class="active" @endif>
+                        <a href="{{ URL('/modern-custAllInActiveList') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Customar Active</span>
+                        </a>
+                    </li>
+                    
+                    <li @if ($selectedMenu == 'Requisition Canceled') class="active" @endif>
+                        <a href="{{ URL('/modern-reqAllCanceledList') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Canceled Requisition</span>
+                        </a>
+                    </li> -->
+
+                </ul>
+
+            </li>
+            <li> <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Requisition</span>
+                </a>
+                <ul class="ml-menu">
+                    <!--  <li @if ($selectedMenu == 'Delivery') class="active" @endif>
+                    <a href="{{ URL('/modern-delivery') }}">
+                        <i class="material-icons">view_list</i>
+                        <span>Acknowledge Sales Order</span>
+                    </a>
+                </li> -->
+
+                    <li @if ($selectedMenu == 'Replace Delivery') class="active" @endif>
+                        <a href="{{ URL('/mts-replace-delivery') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Advance Replace</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Return Delivery') class="active" @endif>
+                        <a href="{{ URL('/mts-return-delivery') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Return Order</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li @if ($selectedMenu == 'Customer Last Balance Upload') class="active" @endif>
+                <a href="{{ URL('/customer-last-balance-upload') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Customer Last Balance</span>
+                </a>
+            </li>
+            <li> <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Report</span>
+                </a>
+                <ul class="ml-menu">
+
+                    <li @if ($selectedMenu == 'Report') class="active" @endif>
+                        <a href="{{ URL('/moderndelivery') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Delivery Report</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Advance Replace Report') class="active" @endif>
+                        <a href="{{ URL('/mts-billing-replace-delivery-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Advance Replace</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Advance Return Report') class="active" @endif>
+                        <a href="{{ URL('/mts-billing-return-delivery-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Return Order</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+        @if (Auth::user()->module_type == 2 && Auth::user()->user_type_id == 5)
+            <li @if ($selectedMenu == 'Report') class="active" @endif>
+                <a href="{{ URL('/mts-admin-delivery') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Sales Order</span>
+                </a>
+            </li>
+
+            <li @if ($selectedMenu == 'Advance Replace Report') class="active" @endif>
+                <a href="{{ URL('/mts-admin-replace-delivery-report') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Advance Replace</span>
+                </a>
+            </li>
+            <li @if ($selectedMenu == 'Advance Return Report') class="active" @endif>
+                <a href="{{ URL('/mts-admin-return-delivery-report') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Return Order</span>
+                </a>
+            </li>
+
+            <li @if ($selectedMenu == 'Ledger') class="active" @endif>
+                <a href="{{ URL('/customer-ledger') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Customer ledger</span>
+                </a>
+            </li>
+            <li @if ($selectedMenu == 'Stock') class="active" @endif>
+                <a href="{{ URL('/customer-stock') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Customer Balance</span>
+                </a>
+            </li>
+            <li @if ($selectedMenu == 'Customer payment') class="active" @endif>
+                <a href="{{ URL('/mts-admin-payment') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Customer Payment</span>
+                </a>
+            </li>
+        @endif
+        @if (Auth::user()->module_type == 2 && Auth::user()->user_type_id == 1)
+            <li> <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Master Data</span>
+                </a>
+                <ul class="ml-menu">
+                    <li @if ($selectedMenu == 'globalcompany') class="active" @endif>
+                        <a href="{{ URL('/mts-opening-route') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Opening Balance</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'globalcompany') class="active" @endif>
+                        <a href="{{ URL('/mts-bank-account') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Bank Account</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Targer file upload') class="active" @endif>
+                        <a href="{{ URL('/modern_target_upload') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Target Upload</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Customer Last Balance Upload') class="active" @endif>
+                        <a href="{{ URL('/customer-last-balance-upload') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Customer Last Balance</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'User List') class="active" @endif>
+                        <a href="{{ URL('/mts-user-list') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>User List</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Customer List') class="active" @endif>
+                        <a href="{{ URL('/mts-customer-list') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Customer</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Outlet List') class="active" @endif>
+                        <a href="{{ URL('/mts-outlet-list') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Outlet List</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Category List') class="active" @endif>
+                        <a href="{{ URL('/mts-category') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Category List</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Product List') class="active" @endif>
+                        <a href="{{ URL('/mts-product-list') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Product List</span>
+                        </a>
+                    </li>
+
+
+                    <li @if ($selectedMenu == 'Supervisor') class="active" @endif>
+                        <a href="{{ URL('/mst-supervisor') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Define Supervisor</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Bank Account List') class="active" @endif>
+                        <a href="{{ URL('/mts-bank-account-list') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Bank Account List</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+        @if (Auth::user()->module_type == 2 && Auth::user()->user_type_id == 6)
+            <li> <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Requisition Manage</span>
+                </a>
+                <ul class="ml-menu">
+                    <li @if ($selectedMenu == 'Delivery') class="active" @endif>
+                        <a href="{{ URL('/mts-approved') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Sales Order</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li @if ($selectedMenu == 'Inventory Management') class="active" @endif>
+                <a href="{{ URL('/inventory-management') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Inventory Manage</span>
+                </a>
+            </li>
+
+            <li @if ($selectedMenu == 'Inventory Report') class="active" @endif>
+                <a href="{{ URL('/mts-inventory-report') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Inventory Report</span>
+                </a>
+            </li>
+
+            <li @if ($selectedMenu == 'globalcompany') class="active" @endif>
+                <a href="{{ URL('/mts-opening-route') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Opening Balance</span>
+                </a>
+            </li>
+            <li @if ($selectedMenu == 'Targer file upload') class="active" @endif>
+                <a href="{{ URL('/modern_target_upload') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Target Upload</span>
+                </a>
+            </li>
+            <li @if ($selectedMenu == 'Customer Last Balance Upload') class="active" @endif>
+                <a href="{{ URL('/customer-last-balance-upload') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Customer Last Balance</span>
+                </a>
+            </li>
+            <li @if ($selectedMenu == 'User List') class="active" @endif>
+                <a href="{{ URL('/mts-user-list') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>User List</span>
+                </a>
+            </li>
+            <li @if ($selectedMenu == 'Customer List') class="active" @endif>
+                <a href="{{ URL('/mts-customer-list') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Customer</span>
+                </a>
+            </li>
+            <li @if ($selectedMenu == 'Outlet List') class="active" @endif>
+                <a href="{{ URL('/mts-outlet-list') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Outlet List</span>
+                </a>
+            </li>
+            <li @if ($selectedMenu == 'Category List') class="active" @endif>
+                <a href="{{ URL('/mts-category') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Category List</span>
+                </a>
+            </li>
+            <li @if ($selectedMenu == 'Product List') class="active" @endif>
+                <a href="{{ URL('/mts-product-list') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Product List</span>
+                </a>
+            </li>
+            <li> <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Report</span>
+                </a>
+                <ul class="ml-menu">
+                    <li @if ($selectedMenu == 'Report') class="active" @endif>
+                        <a href="{{ URL('/mts-manager-delivery') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Sales Order</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Party & Item Wise') class="active" @endif>
+                        <a href="{{ URL('/mts-manager-delivery-ims-wise') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Sales Order Party & Item Wise </span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Advance Replace Report') class="active" @endif>
+                        <a href="{{ URL('/mts-manager-replace-delivery-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Advance Replace</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Advance Return Report') class="active" @endif>
+                        <a href="{{ URL('/mts-manager-return-delivery-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Return Order</span>
+                        </a>
+                    </li>
+
+                    <li @if ($selectedMenu == 'Ledger') class="active" @endif>
+                        <a href="{{ URL('/customer-ledger') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Customer ledger</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Stock') class="active" @endif>
+                        <a href="{{ URL('/customer-stock') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Customer Balance</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Outlet report') class="active" @endif>
+                        <a href="{{ URL('/accounts_payments_rece_report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Customer Payment </span>
+                        </a>
+                    </li>
+                    <li @if ($selectedSubMenu == 'Achievement Report') class="active" @endif>
+                        <a href="{{ URL('/mts-achievement-sales-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Achievement Report </span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Inventory Report') class="active" @endif>
+                        <a href="{{ URL('/mts-inventory-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Inventory Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li @if ($selectedMenu == 'Supervisor') class="active" @endif>
+                <a href="{{ URL('/mst-supervisor') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Define Supervisor</span>
+                </a>
+            </li>
+            <li @if ($selectedMenu == 'Bank Account List') class="active" @endif>
+                <a href="{{ URL('/mts-bank-account-list') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Bank Account List</span>
+                </a>
+            </li>
+        @endif
+        @if (Auth::user()->module_type == 2 && Auth::user()->user_type_id == 3)
+            <li> <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Requisition</span>
+                </a>
+                <ul class="ml-menu">
+
+                    <li @if ($selectedMenu == 'Order Manage') class="active" @endif>
+                        <a href="{{ URL('/mts-order-manage') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Sales Order Manage</span>
+                        </a>
+                    </li>
+
+                    <li @if ($selectedMenu == 'Delivery') class="active" @endif>
+                        <a href="{{ URL('/mts-approved') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Sales Order</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Replace Approve') class="active" @endif>
+                        <a href="{{ URL('/mts-replace-approved') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Advance Replace</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Return Approve') class="active" @endif>
+                        <a href="{{ URL('/mts-return-approved') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Return Order</span>
+                        </a>
+                    </li>
+                    {{-- <li @if ($selectedMenu == 'Delivery') class="active" @endif>
+                    <a href="{{ URL('/mts-return-order') }}">
+                        <i class="material-icons">view_list</i>
+                        <span>Return Order</span>
+                    </a>    
+                </li> --}}
+                </ul>
+            </li>
+            <li> <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Billing Confirmation</span>
+                </a>
+                <ul class="ml-menu">
+                    <li @if ($selectedMenu == 'Delivery Approved') class="active" @endif>
+                        <a href="{{ URL('/mts-delivery-approved') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Sales Order</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Replace Delivery Approved') class="active" @endif>
+                        <a href="{{ URL('/mts-replace-delivery-approved') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Advance Replace</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Return Delivery Approved') class="active" @endif>
+                        <a href="{{ URL('/mts-return-delivery-approved') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Return Order</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {{-- <li @if ($selectedMenu == 'globalcompany') class="active" @endif>
+            <a href="{{ URL('/mts-opening-route') }}">
+                <i class="material-icons">view_list</i>
+                <span>Opening Balance</span>
+            </a>    
+        </li> --}}
+            <li @if ($selectedMenu == 'Outlet pay') class="active" @endif>
+                <a href="{{ URL('/admin_payments_con') }}">
+                    <i class="material-icons">view_list</i>
+                    <span>Payment</span>
+                </a>
+            </li>
+            {{-- <li @if ($selectedMenu == 'Targer file upload') class="active" @endif>
+            <a href="{{ URL('/modern_target_upload') }}">
+                <i class="material-icons">view_list</i>
+                <span>Target Upload</span>
+            </a>    
+        </li> --}}
+
+            <li> <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Report</span>
+                </a>
+                <ul class="ml-menu">
+                    <li @if ($selectedMenu == 'Sales Order Report') class="active" @endif>
+                        <a href="{{ URL('/mts-admin-sales-order') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Sales Order</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Report') class="active" @endif>
+                        <a href="{{ URL('/mts-admin-delivery') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Sales Delivery</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Advance Replace Report') class="active" @endif>
+                        <a href="{{ URL('/mts-admin-replace-delivery-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Advance Replace</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Advance Return Report') class="active" @endif>
+                        <a href="{{ URL('/mts-admin-return-delivery-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Return Order</span>
+                        </a>
+                    </li>
+
+                    <li @if ($selectedMenu == 'Ledger') class="active" @endif>
+                        <a href="{{ URL('/customer-ledger') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Customer ledger</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Stock') class="active" @endif>
+                        <a href="{{ URL('/customer-stock') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Customer Balance</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Customer payment') class="active" @endif>
+                        <a href="{{ URL('/mts-admin-payment') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Customer Payment</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Inventory Report') class="active" @endif>
+                        <a href="{{ URL('/mts-inventory-report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Inventory Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+        @if (Auth::user()->module_type == 2 && Auth::user()->user_type_id == 4)
+            <li> <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Payment Acknowledgement</span>
+                </a>
+                <ul class="ml-menu">
+                    <li @if ($selectedMenu == 'Outlet pay') class="active" @endif>
+                        <a href="{{ URL('/accounts_payments_con') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Payment receive</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Payments Ack') class="active" @endif>
+                        <a href="{{ URL('/accounts-payments-ack') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Payment Ack list</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li> <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">view_list</i>
+                    <span>Payment Verify</span>
+                </a>
+                <ul class="ml-menu">
+                    <li @if ($selectedMenu == 'Outlet pay') class="active" @endif>
+                        <a href="{{ URL('/accounts-payments-verify') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Payment Verify</span>
+                        </a>
+                    </li>
+                    <li @if ($selectedMenu == 'Outlet report') class="active" @endif>
+                        <a href="{{ URL('/accounts_payments_rece_report') }}">
+                            <i class="material-icons">view_list</i>
+                            <span>Payment Verify Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+
+
+        <li class="header"></li>
+        {{--  <li @if ($selectedMenu == 'Password') class="active" @endif>
+            <a href="{{ URL('/password/change-password') }}">
+                <i class="material-icons">person</i>
+                <span>Change Password</span>
+            </a>            
+        </li> --}}
+
+        <li>
+            <a href="{{ URL('/logout') }}"
+                onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                <i class="material-icons col-light-blue">donut_large</i>
+                <span>Sign Out</span>
+            </a>
+            <form id="logout-form" action="{{ URL('/logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+        </li>
+
+        <li class="header"></li>
+
+    </ul>
+</div>

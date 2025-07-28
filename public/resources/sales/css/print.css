@@ -1,0 +1,53 @@
+﻿.headerTable
+    {
+        font-family: arial !important;
+        font-size:8px !important;
+        font-weight: normal;
+        text-align: center;
+        margin: 5px !important;
+        padding: 5px !important;
+    }
+    .rowTableCenter
+    {
+        text-align:center;
+        font-family: arial;
+        font-size: 8px;
+        font-weight: normal;
+        margin: 5px !important;
+        padding: 5px !important;
+    }
+    .rowTableLeft
+    {
+        text-align:left;
+        font-family: arial;
+        font-size: 8px;
+        font-weight: normal; 
+        margin: 5px !important;
+        padding: 5px !important;
+    }
+    .rowTableRight
+    {
+        text-align:right;
+        font-family: arial;
+        font-size: 8px;
+        font-weight: normal;
+        margin: 5px !important;
+        padding: 5px !important;
+    }
+
+    .rowTableChalan
+    {
+       font-family: arial;
+       font-size:12;
+       font-weight: bold; 
+       text-transform: uppercase; 
+       color: #263F93;
+    }
+
+    .rowTableDistributor
+    {
+       margin-top:5px;
+       font-family: arial;
+       font-size:8;
+       font-weight: normal;
+    }

@@ -1,0 +1,7 @@
+<?php
+
+Route::group(
+    ['module' => 'DummyModule', 'namespace' => 'App\Modules\DummyModule\Controllers'], function () {
+        //
+    }
+);

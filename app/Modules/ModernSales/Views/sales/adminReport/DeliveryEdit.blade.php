@@ -1,0 +1,278 @@
+@extends('ModernSales::masterPage')
+@section('content')
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-9">
+                    <h2>
+                        <small> 
+                         <a href="{{ URL('/dashboard') }}"> Dashboard </a> / Delivery
+                     </small>
+                 </h2>
+             </div>
+         </div>
+     </div>
+ </div>
+
+ @if(Session::has('success'))
+ <div class="alert alert-success">
+    {{ Session::get('success') }}                        
+</div>
+@endif
+
+<form action="{{ URL('/not-approved-remarks-submit') }}" method="POST">
+    {{ csrf_field() }}    <!-- token -->
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">                        
+
+                @if(sizeof($resultCartPro)>0)
+
+                <div class="header">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <span> 
+                                PO No &nbsp;&nbsp;&nbsp;&nbsp;: {{ $resultInvoice->po_no }}<br />
+                                Customer Code :&nbsp; {{ $customerInfo->sap_code }}<br />
+                                
+                                    Outlet Name  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp; {{ $resultInvoice->name }}
+                                    <br />
+                                    
+                                   Address  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp; {{ $customerInfo->address }}<br />
+                                            @if($customerInfo->route_id==1)
+                                            Shiping Address&nbsp;:&nbsp; {{ $resultInvoice->address }}
+                                            @endif
+                            </span>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <span>
+
+                                Collected By &nbsp; : {{$resultInvoice->display_name}}<br />
+                                Invoice No : {{ $resultInvoice->order_no }}<br />
+                                Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{ date('d M Y', strtotime($resultInvoice->order_date)) }}
+
+                            </span>
+                        </div>
+                    </div>                                                           
+                </div>
+
+                <div class="header">
+                    <div class="row">
+                         <div class="col-lg-3">
+                            <h2>Sales Order</h2>  
+                         </div>
+                         <div class="col-lg-2 text-right" style="padding-top: 8px;"><h2>Credit Limit.</h2> </div>
+
+                         @if($creditSummery>0)
+                         <div class="col-lg-2 text-left">
+                         <input type="text" name="credit_limit" id="credit_limit" class="form-control btn-success" value="{{ $creditSummery}}" readonly="">  </div>
+                         @else
+                         <div class="col-lg-2 text-left">
+                         <input type="text" name="credit_limit" id="credit_limit" class="form-control btn-danger" value="{{ $creditSummery}}" readonly="">  </div>
+                         @endif
+
+                    </div> 
+                                                
+                </div>
+
+                <div class="body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>Product Group</th>
+                                <th>SAP Code</th>
+                                <th>Product Name</th>
+                                <th>Order Qty</th>
+                                <th>Unit price</th>
+                                <th>Discount %</th>
+                                <th>Order Value</th>                  
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @if(sizeof($resultCartPro)>0)
+                            @php
+                            $serial   = 1;
+                            $count    = 1;
+                            $subTotal = 0;
+                            $totalQty = 0;
+                            $totalPrice = 0;
+                            @endphp
+                            @foreach($resultCartPro as $items)
+                            @php
+                            $resultComm = DB::table('mts_categroy_wise_commission')
+                            ->select('order_commission_value', 'commission')
+                            ->where('mts_categroy_wise_commission.order_id',$items->order_id)
+                            ->where('mts_categroy_wise_commission.cat_id', $items->catid) ->first();                                     
+                            @endphp
+                                                                  
+                            <tr>
+                                <td></td>
+                                <td colspan="6">{{ $items->catname }}  @if(sizeof($resultComm)>0) <span class="pull-right">Discount: {{$resultComm->commission}}, Value: {{$resultComm->order_commission_value}}</span> @endif</td>
+                            </tr>
+                           
+                            @php 
+                            $itemsCount = 1;
+                            $reultPro  = DB::table('mts_order_details')
+                            ->select('mts_order_details.order_det_id', 'mts_order_details.discount', 'mts_order_details.cat_id','mts_order_details.order_id','mts_order_details.order_qty','mts_order_details.order_total_value','mts_order_details.product_id','mts_order_details.order_qty','mts_order_details.p_unit_price','tbl_product_category.id AS catid','tbl_product_category.name AS catname','mts_order.order_id','mts_order.fo_id','mts_order.order_status','mts_order.party_id','tbl_product.id','tbl_product.name AS proname', 'tbl_product.sap_code AS sap_code')
+                            ->join('tbl_product_category', 'tbl_product_category.id', '=', 'mts_order_details.cat_id')
+                            ->join('mts_order', 'mts_order.order_id', '=', 'mts_order_details.order_id')
+                            ->join('tbl_product', 'tbl_product.id', '=', 'mts_order_details.product_id')
+
+                            ->where('mts_order.order_status','Confirmed')                        
+                            ->where('mts_order.fo_id',$foMainId)                        
+                            ->where('mts_order_details.order_id',$DeliveryMainId)
+                            ->where('mts_order_details.cat_id', $items->catid)    
+                            ->get();
+                            //dd($reultPro);
+                            @endphp
+                            @foreach ($reultPro as $itemsPro)
+                            @php
+                            $subTotal += $itemsPro->order_total_value;
+                            $totalQty += $itemsPro->order_qty;
+                            $totalPrice += $itemsPro->order_total_value;
+
+                            @endphp
+
+                            <tr>
+                                <td>{{ $serial }}</td>
+                                <td></td>
+                                <td>{{ $itemsPro->sap_code }}</td>
+                                <td>{{ $itemsPro->proname }}</td>
+                                <td style="text-align: center;">{{ number_format($itemsPro->order_qty,2) }}</td>
+                                <td>{{ $itemsPro->p_unit_price }}</td>
+                                <td>{{ $itemsPro->discount }}</td>
+                                <td style="text-align: center;">{{ number_format($itemsPro->order_total_value,2) }}</td>
+
+                                <input type="hidden" id="change_prod_price{{ $serial }}" value="{{ $itemsPro->p_unit_price }}" >
+
+                                <input type="hidden" name="product_id[]" id="product_id{{ $serial }}" value="{{ $itemsPro->product_id }}" >
+
+                            </tr>
+                            @php
+                            $serial ++;
+                            @endphp
+                            @endforeach                                            
+                        </tr>
+
+                        @endforeach
+                        @endif
+
+                        <tr>
+                            <th colspan="4" style="text-align: right;">Total</th>
+                            <th style="text-align: center;">{{ number_format($totalQty,2) }}</th>
+                            <th style="text-align: center;">{{ number_format($totalPrice,2) }}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align: right;">Total Discount</th>
+                            <th>&nbsp;</th>
+                            <th style="text-align: center;">@if(sizeof($orderCommission)>0)
+                                {{ number_format($orderCommission->commission,2) }} @else {{'0.00'}}  @endif
+                            </th>
+                           
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align: right;">Net Amount</th>
+                            <th>&nbsp;</th>
+                            <th style="text-align: center;">@if(sizeof($orderCommission)>0)
+                                {{ number_format($totalPrice-$orderCommission->commission,2) }} @else {{'0.00'}}  @endif
+                            </th>
+                           
+                        </tr>
+
+                       @php
+                        $remarksResult = DB::table('mts_remarks')
+                            ->where('reference_id',$resultInvoice->order_id)
+                            ->where('customar_id',$customerInfo->customer_id)
+                            ->where('party_id',$resultInvoice->party_id)
+                            ->where('remarks_type','order') 
+                            ->first();
+
+                        @endphp
+
+                        @if(sizeof($remarksResult)>0)
+                         <tr>
+                            <td colspan="1" style="text-align: center;">Remarks</td>
+                              
+                            <td colspan="4">{{$remarksResult->remarks}}</td>  
+                        </tr> 
+                        @else
+
+                        <tr>
+                            <td colspan="2" style="text-align: center;">Remarks</td>
+                            
+                            <td  colspan="4" style="text-align: center;"><textarea class="form-control" rows="2" name="remarks" id="remarks"></textarea></td>
+                           
+                        </tr>
+
+                        @endif
+
+                    </tbody>
+
+                </table>
+                <p></p>
+                <div class="row" style="text-align: center;">
+                    <div class="col-sm-3">
+                        <a href="{{ URL('/mts-approved-order/'.$resultInvoice->order_id.'/'.$resultInvoice->party_id.'/'.'yes') }}">
+                            <button type="button" class="btn bg-pink btn-block btn-lg waves-effect">Approved</button>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+
+                         <button type="submit" class="btn bg-pink btn-block btn-lg waves-effect">Not Approved</button>
+
+                        {{-- <a href="{{ URL('/mts-approved-order/'.$resultInvoice->order_id.'/'.$resultInvoice->party_id.'/'.'no') }}">
+                            <button type="button" class="btn bg-pink btn-block btn-lg waves-effect">Not Approved</button>
+                        </a> --}}
+                    </div>
+                </div>
+                <input type="hidden" name="orderid" id="orderid" value="{{ $resultInvoice->order_id }}">
+                <input type="hidden" name="party_id" id="party_id" value="{{ $resultInvoice->party_id }}">
+                <input type="hidden" name="customer_id" id="customer_id" value="{{ $customerInfo->customer_id }}">
+                <input type="hidden" name="foMainId" id="foMainId" value="{{ $foMainId }}">
+                <input type="hidden" name="remarks_type" id="remarks_type" value="order">
+
+            </div>
+
+            @endif
+        </div>
+    </div>
+</div>
+
+</form>
+
+<!-- #END# Basic Validation -->            
+</div>
+</section>
+
+<div class="modal fade" id="showBundleProductCon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="showBundleProductContent"></div>
+</div>
+
+<div class="modal fade" id="showBundleProductConMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header" style="background-color: #A62B7F">
+                {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> --}}
+                <h4 class="modal-title" id="myModalLabel" >Success</h4>
+            </div>
+            
+            <div class="modal-body" style="text-align: center;">
+                {{-- <p><h4>Successfully added offer product</h4></p> --}}
+                <p>Successfully added offer product</p>
+                <p class="debug-url"></p>
+            </div>
+
+            <div class="modal-footer">
+                {{-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> --}}
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

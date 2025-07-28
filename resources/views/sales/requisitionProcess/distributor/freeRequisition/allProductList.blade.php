@@ -1,0 +1,123 @@
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">                
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h2>PRODUCTS</h2>
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: right;">
+                        <button type="submit" class="btn bg-pink btn-block btn-lg waves-effect">ADD</button>
+                    </div>
+
+                </div>                           
+            </div>
+            <div class="body">
+                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>Product Name</th>
+                                <th>Free Qty</th>
+                                <th>Requisition Qty</th>
+                                <th>Value</th>
+                               
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            @if(sizeof($resultProduct) > 0)
+                                @php
+                                $serial = 1;
+                                $distributor_id = Auth::user()->id; 
+
+                                if(sizeof($lastReq)>0){
+                               // $date = date('Y-m-d H:i:s',strtotime($lastReq->req_date));
+                                $date = $lastReq->req_date;
+
+                                }
+
+                                @endphp
+
+                                @foreach($resultProduct as $products)
+                                @php
+
+                                if(sizeof($lastReq)>0){
+                                $freeOrder  =  DB::select("SELECT e.product_id,sum(e.free_delivery_qty) AS qty FROM (
+                                    SELECT order_date,point_id,distributor_id,product_id,free_delivery_qty FROM tbl_order_special_free_qty WHERE distributor_id = $distributor_id AND  product_id=$products->id AND delivery_date>'".$date."' AND (status=0 OR status=3)
+                                    UNION ALL
+                                    SELECT order_date,point_id,distributor_id,product_id,free_delivery_qty FROM tbl_order_special_and_free_qty WHERE distributor_id = $distributor_id AND product_id=$products->id AND delivery_date>'".$date."' AND status=0
+                                    UNION ALL
+                                    SELECT order_date,point_id,distributor_id,product_id,free_delivery_qty FROM tbl_order_free_qty WHERE distributor_id = $distributor_id AND product_id=$products->id AND delivery_date>'".$date."'  AND status=0
+                                    UNION ALL
+                                    SELECT order_date,point_id,distributor_id,product_id,free_delivery_qty FROM tbl_order_regular_and_free_qty WHERE distributor_id = $distributor_id AND product_id=$products->id AND delivery_date>'".$date."' AND status=0
+                                    ) AS e 
+                                    group by e.product_id");
+                                }
+                                else{
+//dd($products->id);
+                                  $freeOrder  =  DB::select("SELECT e.product_id,sum(e.free_delivery_qty) AS qty FROM (
+                                    SELECT order_date,point_id,distributor_id,product_id,free_delivery_qty FROM tbl_order_special_free_qty WHERE distributor_id = $distributor_id AND  product_id=$products->id AND (status=0 OR status=3)
+                                    UNION ALL
+                                    SELECT order_date,point_id,distributor_id,product_id,free_delivery_qty FROM tbl_order_special_and_free_qty WHERE distributor_id = $distributor_id AND product_id=$products->id AND status=0
+                                    UNION ALL
+                                    SELECT order_date,point_id,distributor_id,product_id,free_delivery_qty FROM tbl_order_free_qty WHERE distributor_id = $distributor_id AND product_id=$products->id  AND status=0
+                                    UNION ALL
+                                    SELECT order_date,point_id,distributor_id,product_id,free_delivery_qty FROM tbl_order_regular_and_free_qty WHERE distributor_id = $distributor_id AND product_id=$products->id AND status=0
+                                    ) AS e 
+                                    group by e.product_id");
+                                } 
+
+                              
+                                   $freeQty = 0;
+                                   if(sizeof($freeOrder)>0){
+                                    $freeQty = $freeOrder[0]->qty;
+                                   }               
+                                @endphp
+                                <tr>
+                                    <th>{{ $serial }}</th>
+                                    <input type="hidden" id="price{{$serial}}" name="price[]" value="{{ $products->price }}">
+                                    <input type="hidden" id="category_id{{$serial}}" name="category_id[]" value="{{ $products->category_id }}">
+                                    <input type="hidden" id="unit{{$serial}}" name="unit[]" value="{{ $products->unit }}">
+                                    <input type="hidden" id="produuct_id{{$serial}}" name="produuct_id[]" value="{{ $products->id }}">
+                                    <th>{{ $products->name }}</th>
+                                    <th><input type="number" class="form-control" id="freeQty{{$serial}}" name="freeQty[]" maxlength="3" pattern="[1-9]" min="1" value="{{$freeQty}}" style="width: 80px;" onkeyup="totalsFreeFO();" readonly="">
+                                    </th> 
+                                    <th><input type="number" class="form-control" id="qty{{$serial}}" name="qty[]" maxlength="3" pattern="[1-9]" min="1" value="" style="width: 80px;" onkeyup="freeQty({{$serial}})" onmouseout="totalsFO();">
+                                    </th>
+                                    <th><input type="number" class="form-control" id="value{{$serial}}" name="value[]" maxlength="10" value="0" style="width: 80px;" readonly=""></th>
+                                                                      
+                                </tr>
+                                @php
+                                $serial ++;
+                                @endphp
+
+                                @endforeach
+                            @endif
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="2" style="text-align: right; padding-top: 17px;" align="right">Total : </th>
+                                <th><input type="text" class="form-control" id="totalFree" name="totalFree" readonly="" value="0" style="width: 80px;"></th>
+                                <th><input type="text" class="form-control" id="totalQty" name="totalQty" readonly="" value="0" style="width: 80px;"></th>
+                                <th><input type="text" class="form-control" id="totalValue" name="totalValue" readonly="" value="0" style="width: 80px;"></th>
+                                
+                               
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-sm-10" style="text-align: right;">
+                            &nbsp;
+                        </div>
+
+                        <div class="col-sm-2" style="text-align: right;">
+                            <button type="submit" class="btn bg-pink btn-block btn-lg waves-effect">ADD</button>
+                        </div>
+                    </div>                    
+            </div>
+        </div>
+    </div>
+</div>
