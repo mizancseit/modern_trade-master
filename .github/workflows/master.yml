@@ -26,7 +26,7 @@ jobs:
       - name: Node js Environment Setup
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '18'
         
       - name: Install NPM & Build
         run: |
@@ -36,7 +36,7 @@ jobs:
       - name: Setup PHP with PECL extension
         uses: shivammathur/setup-php@v2
         with:
-         php-version: '8.3'
+         php-version: '7.1'
          extensions: mbstring, xml, mysql, pdo, pdo_mysql, bcmath, ctype, fileinfo, json, tokenizer, openssl
          tools: composer:v2
 
