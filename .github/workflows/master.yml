@@ -22,15 +22,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: '20'
       
-      - name: Install npm dependencies
-        run: |
-          npm install 
-          npm ci
+      # - name: Install npm dependencies
+      #   run: |
+      #     npm install 
+      #     npm ci
 
       - name: Setup PHP with PECL extension
         uses: shivammathur/setup-php@v2
