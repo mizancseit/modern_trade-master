@@ -15,37 +15,34 @@ jobs:
           MYSQL_USER: laravel_user
           MYSQL_PASSWORD: secrete
         ports:
-         - 3306:3306
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-          
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Node js Environment Setup
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-        
-      - name: Install NPM & Build
-        run: |
-         npm ci
-         npm run build
+      
+      - name: Install npm dependencies
+        run: npm install
 
       - name: Setup PHP with PECL extension
         uses: shivammathur/setup-php@v2
         with:
-         php-version: '7.1'
-         extensions: mbstring, xml, mysql, pdo, pdo_mysql, bcmath, ctype, fileinfo, json, tokenizer, openssl
-         tools: composer:v2
+          php-version: '7.1'  # Laravel 9+ requires PHP 8.0+
+          extensions: mbstring, xml, mysql, pdo, pdo_mysql, bcmath, ctype, fileinfo, json, tokenizer, openssl
+          tools: composer:v2
 
       - name: Copy .ENV
         run: |
           cp .env.example .env
           cp .env.example .env.testing
 
-      - name: Setup Environment Variable
+      - name: Setup Environment Variables
         run: |
           echo "DB_CONNECTION=mysql" >> .env
           echo "DB_HOST=127.0.0.1" >> .env
@@ -61,28 +58,21 @@ jobs:
           echo "DB_USERNAME=laravel_user" >> .env.testing
           echo "DB_PASSWORD=secrete" >> .env.testing
 
-      - name: Install dependencies
-        run: |
-          composer install --prefer-dist --no-interaction --no-scripts
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction --no-scripts
 
       - name: Wait for MySQL
         run: sleep 15
 
-      - name: Key Genarate and Migrate
+      - name: Key Generate and Migrate
         run: |
           php artisan key:generate --env=testing
           php artisan migrate --env=testing
 
-      - name: Execute Category Test
+      - name: Execute Tests
         run: php artisan test --env=testing
 
-      # - name: Prepare Artifact Folder
-      #   run: |
-      #     mkdir -p artifact
-      #     cp -r app bootstrap config database public resources routes storage artisan composer.* .env.testing .env artifact/
-      #     cp -r vendor node_modules artifact/ # optional if needed in artifact
-
-      - name: Push Code
+      - name: Push Code via SCP
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST_NAME }}
@@ -90,19 +80,3 @@ jobs:
           key: ${{ secrets.HOST_SSHKEY }}
           source: "./*"
           target: "/var/www/html"
-          
-          
-         
-
-
-      # - name: Upload Laravel Artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: laravel-app-artifact
-      #     path: artifact
-
-
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Download Artificat
