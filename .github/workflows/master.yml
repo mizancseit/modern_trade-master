@@ -1,5 +1,4 @@
-name: Build Laravel Project
-
+name: Laravel Project
 on:
   workflow_dispatch:
 
@@ -43,16 +42,17 @@ jobs:
 
       - name: Copy .ENV
         run: |
-          cp .env.testing .env
+          cp .env.example .env
+          cp .env.example .env.testing
 
       - name: Setup Environment Variable
         run: |
           echo "DB_CONNECTION=mysql" >> .env
           echo "DB_HOST=127.0.0.1" >> .env
           echo "DB_PORT=3306" >> .env
-          echo "DB_DATABASE=laravel_test_db" >> .env
-          echo "DB_USERNAME=laravel_user" >> .env
-          echo "DB_PASSWORD=secrete" >> .env
+          echo "DB_DATABASE=${{secrets.DB_DATABASE}}" >> .env
+          echo "DB_USERNAME=${{secrets.DB_USERNAME}}" >> .env
+          echo "DB_PASSWORD=${{secrets.DB_PASSWORD}}" >> .env
 
           echo "DB_CONNECTION=mysql" >> .env.testing
           echo "DB_HOST=127.0.0.1" >> .env.testing
@@ -60,7 +60,6 @@ jobs:
           echo "DB_DATABASE=laravel_test_db" >> .env.testing
           echo "DB_USERNAME=laravel_user" >> .env.testing
           echo "DB_PASSWORD=secrete" >> .env.testing
-
 
       - name: Install dependencies
         run: |
@@ -71,7 +70,7 @@ jobs:
 
       - name: Key Genarate and Migrate
         run: |
-          php artisan key:generate
+          php artisan key:generate --env=testing
           php artisan migrate --env=testing
 
       - name: Execute Category Test
@@ -90,7 +89,7 @@ jobs:
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.HOST_SSHKEY }}
           source: "./*"
-          target: "/var/www/html/learnwithmehrab.com/public_html/"
+          target: "/var/www/html"
           
           
          
