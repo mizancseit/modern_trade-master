@@ -30,7 +30,7 @@ jobs:
         
       - name: Install NPM & Build
         run: |
-         npm ci
+         npm install
          npm run build
 
       - name: Setup PHP with PECL extension
