@@ -1,4 +1,4 @@
-name: Laravel Project
+name: Laravel Project 
 on:
   workflow_dispatch:
 
