@@ -74,7 +74,6 @@ jobs:
           cat .env
           cat .env.testing
           php artisan key:generate --env=testing
-          php artisan migrate --env=testing
 
       - name: Execute Tests
         run: php artisan test --env=testing
