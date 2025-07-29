@@ -83,4 +83,4 @@ jobs:
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.HOST_SSHKEY }}
           source: "./*"
-          target: "/var/www/html"
+          target: "/var/www/html/modern_trade-master"
