@@ -1,0 +1,141 @@
+Md. Mizanor Rahman
+Assistant Manager, IT Infrastructure CodersTrust Bangladesh
+Location: Shukrabad, 24/4, Dhanmondi, Dhaka-1200
+Phone: +880-1747815688, +880-1918544116,
+Email: mizancseit9@gmail.com
+LinkedIn Profile: https://www.linkedin.com/in/mizancseit/
+Career Summary
+I am a skilled and experienced IT Professional with over 9 years of experience. With my strong experience in the IT industry
+and my expertise in a wide range of IT systems, I have a strong background in IT infrastructure, team leadership, and IT
+support. I am confident in my ability to successfully take on new challenges and find innovative solutions. I am committed to
+staying up-to-date with new technologies and industry developments, and am eager to contribute my skills and experience to
+a dynamic organization.
+Professional Certifications Credential ID
+• All professional certifications link : https://v2.credential.net/profile/mizanorcseit/wallet#gs.7ye1iu
+
+• Associate Cloud Engineer (GCP-Certified) AZX4Md/41707
+• AZ-800 - Administering Windows Server Hybrid Core Infrastructure MS1100386525
+• AZ-801 - Configuring Windows Server Hybrid Advanced Services MS1100386525
+• MikroTik Certified Network Associate (MTCNA) 1806NA2145
+• MikroTik Certified Routing Engineer (MTCRE) 1910RE8952
+• Cisco Certified Network Associate (CCNA RnS) CSCO13643973
+• Google Professional Workspace Administrator. MZy7MU/41907
+• Oracle Cloud Infrastructure Foundations 2021 Certified Associate. 2906537020CIBF2021
+• Network Security Expert Fortinet (NSE-1) HE7p1Jj39Z
+• Network Security Expert Fortinet (NSE-2) OEA16aHZZW
+• Network Security Expert Fortinet (NSE-3) 2jdSRZGBdE
+• ICSI Certified Engineer. BJ5PSV8NCMYK
+Areas of Expertise
+• Linux SystemArchitecture andNetwork Planning andDeploymentfordifferentprojects.
+• Windows Server Administration: proficient in administering 2003, 2008, 2012 R2, 2016, and 2019.
+• Active Directory Administration: experienced in managing ADDS with GPO.
+• Network Administration: skilled in configuring Mikrotik Router and Cisco L2/L3 switches, as well as managing access
+points from various brands such as Altai, IP-COM, Unifi, Cambium, and Tenda.
+• Email System: Managing & Administering Office365 and Google Workspace.
+• Virtualization: experienced in PROXMOX , VMware Workstation, Oracle VirtualBox, and Hyper V.
+• Managing and maintaining Network System security with NG Firewall Sophos XG310 C Palo Alto PA3410 with
+FortiGate firewall.
+• Security: skilled in endpoint security with Tralex Macafee ,Kaspersky and Bitdefender servers.
+• CCTV surveillance systems: managing DVR and NVR from various brands such as Hikvision, Dahua, Jovision"
+• Database Administration: proficient in managing databases with SQL and Oracle.
+• Communication Systems: IP-based PA system with paging and Elastic IP Telephony Server.
+• IT Support: experienced in attendance devices, Printer, Projector, scanner ect & providing user training.
+Professional Experience
+Assistant Manager (IT) Jan 2023– Present
+CodersTrust Bangladesh
+Key Activities:
+• Serve as a System & Network Admin, responsible for managing all IT services across 4 corporate & Branche Offices.
+• Configure routing and switching equipment, ensuring seamless connectivity and high-speed data transfer.
+• Responsible for maintaining and optimizing network infrastructure to ensure smooth and secure data flow.
+• Install and configure both local and network printers, scanners, and projectors to enable efficient data management
+and presentation.
+• Install, configure, and troubleshoot IP cameras to ensure robust security surveillance.
+• Manage Google Workspace to ensure smooth collaboration and communication among teams.
+• Ensure timely and effective IT support to all users, and oversee the performance of IT staff members to maximize
+productivity and quality of service.
+
+Assistant Manager (IT) Nov 2021 – Dee 2023
+Manufacturerof SAMSUNGinBangladesh (FairElectronics Limited)
+Duties/Responsibilities
+• Installation, Configuration, and Manage of standalone and VMware vSphere infrastructure Data Center And CGP cloud.
+• Configuring, Managing, Maintenance Upgrade system by implementing and maintaining security controls of
+various.
+• Responsible to Manage, Maintaining Upgrade of various development applications like MSSQL server, MySQL Server.
+• Managing and maintaining Network System security with NG Firewall Sophos XG310 C Palo Alto PA3410
+• collaboration of Samsung Security Guideline.
+• virtual servers and integrate automation processes.
+• Provide documentation and technical specifications to IT staff for planning and implementing new or upgrades of IT
+• Perform regular backup operations and implement appropriate processes for data protection, disaster recovery, and
+• fail-over procedures of SOP.
+• Configured 25+ must needed systems such as Apache/Nginx, Redmine, Mariadb-Cluster,NFS, Radius, Rsyslog, Ticketing,
+Haproxy, Proxmox VE and Email Filter. BR
+ExpertonVirtualization:Proxmox VE,VMware
+System Engineer October 2019 – October 2021
+ShebaGroup(ShebaTechnology limited).
+Duties/Responsibilities
+• System Architecture and Network Planning and Deployment for different projects.
+• System Maintenance: Web Server, Database Server, DNS Server, NTP Server, FTP Server, Email Server, Video Streaming
+• Server, Centralized Calendar and Hosting Server etc.
+• Virtualization, Storage with Clustering and High Availability: KVM, Proxmox.BR. Private Cloud Storage: owncloud
+• Configure/add new services as necessary. Perform periodic performance reporting to support capacity planning.
+• VMsmanagement-Backup and Restore, Live Migration, Resource Planning.
+• Load Balancer: Software-based Ha-Proxy Load Balancer.
+Executive (Core Network and System) January 2018 – September-2019
+AccessTelecom (BD) Ltd
+Duties/Responsibilities
+• POPRouter,Switch,OLTconfiguration,andmaintenance.
+• Dataandinternetconnectivity installationand troubleshooting.
+• FTTXnetworkinstallation,maintenance,andtroubleshooting.
+• Point-to-pointfiber connectivity installation, maintenance, and troubleshooting.
+• Communicatewith third-party vendors toresolve fiberissues.
+• Network monitoring via SNMP, DUDE, and Nagios.
+TheKOWCompany December2014 – December-2017
+Network Engineer- System C Network
+Duties/Responsibilities
+• AbletomaintainCconfigure networkattachstorage (NAS)server.
+• AbleTo Install, Configure C Maintain SIP server on Asterisk Elastix, 3CX and IPPBX hardware device like GrandStream.
+• Able to Laptop and Desktop troubleshot service aswell as Hard Disk data recovery.
+KeyProjects
+2. Career Hub (LMS)for BRAC
+• Deployment Language: PHP(Laravel), PHP(Composer), MariaDB 10.5, NodeJs-12.19 and reactJS.
+• SystemServices: Apache,NFS,HAProxy Load Balancer (LB).
+• Operating System: Centos 7.9
+3. Task Management Platform (TMP)for BRAC
+• Deployment Language: Docker, Docker-compose, Docker-container, PHP(Laravel), PHP(Composer), MariaDB 10.5
+
+• System Services: Nginx, HAProxy Load Balancer (LB).
+• Operating System: Centos 7.9
+4. Small and Medium-sized Enterprise (SME) system for BRAC Bank
+• Deployment Language: Docker, Docker-compose, Docker-container, PHP(Laravel), PHP(Composer),
+• MariaDB 10.5, AngularCLI-12.0.5, NodeJs-16.3.0
+• System Services: Nginx, HAProxy Load Balancer(LB).
+• Operating System: Centos 7.9
+5. Project Management Unit (PMU) for BRAC
+• Deployment Language: PHP(Laravel), PHP(Composer), MariaDB 10.5
+• System Services: Apache
+• Operating System: Centos 7.9
+6. ElectronicKnowYour Customer(eKYC)for UnitedFinance Limited(UFL)forImageprocess, FaceMatching C
+EC-Crawling
+• Deployment Language: DotNet, Python3.6, MSSQL Server 2016
+• System Services: IIS
+• Operating System: Centos 7.8, Windows Server 2016
+7. ElectronicKnowYour Customer(eKYC)forGuardianLife Insurance Ltd.(GLIL)forImageprocess, FaceMatching C
+EC-Crawling
+• Deployment Language: DotNet, Python3.6
+• System Services: Apache
+• Operating System: Centos 7.8
+
+Education
+• BSc in Computer Science s Engineering, Bangladesh University, 2019, CGPA: 3.51
+• Diploma in Computer Science and Engineering, Kishoreganj Polytechnic Institute, Kishoreganj, 2013,
+CGPA: 3.62
+• SSC in Genarel, Ahmadu Jubaida biddya Niketon, 2009 GPA: 5
+Personal Information
+• Father's Name: Atahar Ali
+• Mother's Name: Rabia Akter
+• Date of Birth: 30th Nov 1994
+• Gender: Male
+• Marital Status: Married
+• Nationality: Bangladeshi
+• Religion: Islam
+• Permanent Address: Charpumdhi, Charpumdhi-2300, Hossenpur, Hossainpur, Kishoreganj 2320
