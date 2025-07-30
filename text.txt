@@ -1,2 +1,76 @@
-hello mizanor rahman
-gdgshdgsahgdlsagdysgfdf
+#Knowledge_Alert 📚🚨⚠️
+ *Microsoft Certified Solutions Expert*
+
+⸻
+Q1. hashtag#What is hashtag#Active_Directory?
+A: A Microsoft service that manages users, computers, and other resources in a Windows domain network.
+⸻
+Q2. hashtag#What is a hashtag#Domain_Controller?
+A: A server that handles security authentication requests within a Windows domain.
+⸻
+Q3. hashtag#What are hashtag#FSMO_roles?
+A: These are 5 special roles in AD: Schema Master, Domain Naming Master, RID Master, PDC Emulator, and Infrastructure Master.
+⸻
+Q4. hashtag#What is the purpose of hashtag#Group_Policy?
+A: It allows centralized management and configuration of operating systems, apps, and users’ settings.
+⸻
+Q5. hashtag#What is hashtag#DHCP?
+A: It dynamically assigns IP addresses to devices in a network to avoid manual configuration.
+⸻
+Q6. hashtag#What is hashtag#DNS and how does it work?
+A: DNS translates domain names into IP addresses so users can access websites using easy-to-remember names.
+⸻
+Q7. hashtag#What is the hashtag#difference between hashtag#NTFS and hashtag#FAT32?
+A: NTFS supports permissions, encryption, and large files; FAT32 is basic and outdated.
+⸻
+Q8. hashtag#How do you hashtag#promote a hashtag#server to a hashtag#Domain_Controller?
+A: Install AD DS role → Configure with Server Manager or PowerShell → Reboot.
+⸻
+Q9. hashtag#What is a hashtag#Forest in hashtag#Active_Directory?
+A: A forest is the highest-level container in AD, containing one or more domains.
+⸻
+Q10. hashtag#What is hashtag#RAID and hashtag#why is it hashtag#used?
+A: RAID is a data storage method that improves performance and/or redundancy.
+⸻
+Q11. hashtag#What is hashtag#Organizational_Unit (OU)?
+A: A container in AD used to organize users, groups, and computers for easier management.
+⸻
+Q12. hashtag#What are the hashtag#default_ports used in hashtag#AD_services?
+A:
+ • LDAP: 389
+ • LDAPS: 636
+ • DNS: 53
+ • Kerberos: 88
+⸻
+Q13. hashtag#What’s the hashtag#difference between hashtag#Authentication and hashtag#Authorization?
+A:
+ • Authentication: Verifying identity
+ • Authorization: Granting access rights
+⸻
+Q14. hashtag#What is the hashtag#SYSVOL_folder used for?
+A: It stores group policy objects and login scripts shared across DCs.
+⸻
+Q15. hashtag#How can you take the hashtag#backup of hashtag#Active_Directory?
+A: Use Windows Server Backup to backup System State.
+⸻
+Q16. hashtag#What is hashtag#WINS?
+A: Windows Internet Name Service. It resolves NetBIOS names to IP addresses (legacy tech).
+⸻
+Q17. hashtag#What is the hashtag#difference between hashtag#Tree and hashtag#Forest in hashtag#AD?
+A:
+ • Tree: Multiple domains in a hierarchy
+ • Forest: Collection of one or more trees
+⸻
+Q18. hashtag#What is a hashtag#Global_Catalog_Server?
+A: A domain controller that contains a partial replica of every object in AD Forest.
+⸻
+Q19. hashtag#How to check hashtag#replication between hashtag#domain_controllers?
+A: Use tools like repadmin /replsummary or Event Viewer.
+⸻
+Q20. hashtag#What is hashtag#DSRM (Directory Services Restore Mode)?
+A: A special boot mode used to restore or repair Active Directory. 
+
+ hashtag#MicrosoftCertifiedSolutionsExpert
+hashtag#ActiveDirectory hashtag#WindowsServer hashtag#ITKnowledge hashtag#Networking hashtag#Cybersecurity hashtag#TechTips hashtag#MCSE hashtag#ITProfessionals hashtag#TechLearning hashtag#KnowledgeSharing hashtag#MicrosoftCertification hashtag#DomainController hashtag#GroupPolicy hashtag#DHCP hashtag#DNS hashtag#NTFS hashtag#FAT32 hashtag#RAID hashtag#OrganizationalUnit hashtag#LDA
+
+P
